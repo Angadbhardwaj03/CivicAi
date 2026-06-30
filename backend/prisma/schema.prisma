@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  clerkId   String   @unique
+  email     String   @unique
+  name      String?
+  role      Role     @default(CITIZEN)
+  points    Int      @default(0) // Gamification
+  reports   Report[]
+  comments  Comment[]
+  votes     Vote[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  CITIZEN
+  OFFICIAL
+  ADMIN
+}
+
+model Report {
+  id                  String   @id @default(uuid())
+  title               String
+  description         String
+  category            String
+  severity            String
+  status              ReportStatus @default(PENDING)
+  latitude            Float
+  longitude           Float
+  imageUrl            String?
+  aiConfidence        Float?
+  aiSummary           String?
+  estimatedResolution String?
+  userId              String
+  user                User     @relation(fields: [userId], references: [id])
+  departmentId        String?
+  department          Department? @relation(fields: [departmentId], references: [id])
+  comments            Comment[]
+  votes               Vote[]
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+enum ReportStatus {
+  PENDING
+  ASSIGNED
+  IN_PROGRESS
+  RESOLVED
+  REJECTED
+}
+
+model Department {
+  id          String   @id @default(uuid())
+  name        String   @unique // e.g. "PWD", "Electric Department"
+  reports     Report[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  reportId  String
+  report    Report   @relation(fields: [reportId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Vote {
+  id        String   @id @default(uuid())
+  isUpvote  Boolean
+  reportId  String
+  report    Report   @relation(fields: [reportId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([reportId, userId]) // A user can only vote on a report once
+}

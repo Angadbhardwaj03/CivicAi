@@ -1,6 +1,6 @@
-# 🏛️ CivicAI — Frontend
+# 🏛️ CivicAI 
 
-Welcome to the **CivicAI** frontend—a modern, AI-augmented citizen engagement and municipal operations mapping portal. Built with **Next.js 15**, **Tailwind CSS v4**, and **Clerk**, civic engagement is made seamless, transparent, and gamified.
+Welcome to the **CivicAI** —a modern, AI-augmented citizen engagement and municipal operations mapping portal. Built with **Next.js 15**, **Tailwind CSS v4**, and **Clerk**, civic engagement is made seamless, transparent, and gamified.
 
 ---
 

@@ -1,98 +1,117 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# ⚙️ CivicAI — Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Welcome to the **CivicAI** backend—the high-performance, AI-driven core of the platform. Built with **NestJS**, **Prisma (PostgreSQL)**, and **Socket.io**, it orchestrates report ingestion, AI-triage routing, duplication checks, and real-time dispatch synchronization.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 🌟 Key Backend Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### 1. 🤖 AI Triage & Orchestration Engine
 
-## Project setup
+- **Automated Categorization:** Analyzes citizen complaints (text/images) via **Google Gemini AI / OpenAI** to identify the issue category (_Roads_, _Sanitation_, _Environment_, _Parks_).
+- **Automatic Severity Assessment:** Determines the urgency (High, Medium, Low) and assigns a target SLA response limit (e.g., 24h, 48h, 72h).
+- **Duplicate Detection:** Employs semantic analysis and image-hashing to identify duplicate reports within proximity coordinates.
+- **Auto-Routing:** Dynamically assigns the ticket to the corresponding municipal department.
 
-```bash
-$ npm install
+### 2. 📡 Real-Time Synchronized Dispatch
+
+- **WebSocket Server:** Uses **Socket.io** to broadcast updates instantly to all connected clients.
+- **Live Status Broadcasts:** When an authority updates a ticket's status on `/tracker` (e.g. assigning a crew, setting officer status to _In Progress_ or _Resolved_), the changes reflect instantly on the citizen's browser.
+
+### 3. 💾 Secure Data Persistence
+
+- **Database Management:** Configured with **PostgreSQL** for storing reports, user points, verification history, and officer dispatch records.
+- **Next-Gen ORM:** Uses **Prisma ORM** for easy type-safe database queries and migrations.
+
+### 4. 🎛️ Cross-Origin Resource Sharing (CORS)
+
+- Secured and configured CORS policy to enable smooth document uploads and API requests from the Next.js frontend.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Core Framework:** NestJS (NodeJS)
+- **Database ORM:** Prisma ORM
+- **Database:** PostgreSQL
+- **WebSockets:** Socket.io
+- **AI Model API:** Google Gemini Pro / OpenAI GPT-4o
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (>= 20.9.0)
+- PostgreSQL Database Server running locally or in the cloud.
+
+### Environment Setup
+
+Create a `.env` file in the root of the `backend` folder:
+
+```ini
+# Server Configuration
+PORT=3001
+
+# PostgreSQL Database URL
+DATABASE_URL="postgresql://username:password@localhost:5432/civicai?schema=public"
+
+# AI Model APIs
+GEMINI_API_KEY=your_gemini_api_key_here
+OPENAI_API_KEY=your_openai_api_key_here
+
+# WebSocket Config
+SOCKET_PORT=3002
 ```
 
-## Compile and run the project
+### Installation & Run
 
 ```bash
-# development
-$ npm run start
+# 1. Install dependencies
+npm install
 
-# watch mode
-$ npm run start:dev
+# 2. Run Prisma Database Migrations
+npx prisma migrate dev --name init
 
-# production mode
-$ npm run start:prod
+# 3. Start the development server (with watch mode)
+npm run start:dev
 ```
 
-## Run tests
+The server will start running on [http://localhost:3001](http://localhost:3001).
+
+---
+
+## 📡 API Endpoint Overview
+
+### Citizen Services
+
+- `POST /api/issues` — Intake a citizen report (processes description, coordinates, image URL, and flags categories).
+- `GET /api/issues` — Query all active or resolved issues.
+- `GET /api/issues/:id` — Retrieve details, timeline tracker, and assigned officer for a specific `REP-XXXX` code.
+
+### Authority Tools
+
+- `PATCH /api/issues/:id/dispatch` — Assign an officer, set SLA limits, and update progress states.
+
+### Gamification & Community
+
+- `GET /api/users/:userId/points` — Retrieve citizen's XP, badges, and leaderboard standing.
+- `POST /api/issues/:id/verify` — Submit a community verification picture to secure bonus XP and resolve a ticket.
+
+---
+
+## 📂 Project Structure
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+backend/
+├── prisma/                 # Database Schema and Migrations
+│   └── schema.prisma       # Prisma Database Layout
+├── src/
+│   ├── issues/             # Issues Module (Controllers, Services, Logic)
+│   ├── users/              # Users & Leaderboard Module
+│   ├── ai/                 # AI Engine service wrappers (Gemini/OpenAI)
+│   ├── gateway/            # Socket.io Gateways for WebSocket broadcasts
+│   └── main.ts             # Application entry point (sets up CORS & ports)
+└── package.json
 ```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).

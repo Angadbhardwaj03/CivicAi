@@ -1,0 +1,162 @@
+﻿Γû▓ Next.js 16.2.9 (Turbopack)
+- Environments: .env.local
+
+node.exe : ΓÜá The "middleware" file 
+convention is deprecated. Please use 
+"proxy" instead. Learn more: https://n
+extjs.org/docs/messages/middleware-to-
+proxy
+At C:\Program Files\nodejs\npx.ps1:29 
+char:3
++   & $NODE_EXE $NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpec 
+   ified: (ΓÜá The "middle...leware-  
+  to-proxy:String) [], RemoteExcept   
+ ion
+    + FullyQualifiedErrorId : NativeC 
+   ommandError
+ 
+  Creating an optimized production build ...
+Error: Can't resolve 
+'tailwindcss-animate' in 
+'D:\CivicAI\frontend\src\app'
+    [2m[at finishWithoutResolve (D:\C
+ivicAI\frontend\node_modules\enhanced-
+resolve\lib\Resolver.js:942:18)][0m
+    [2m[at D:\CivicAI\frontend\node_m
+odules\enhanced-resolve\lib\Resolver.j
+s:1034:14][0m
+    [2m[at D:\CivicAI\frontend\node_m
+odules\enhanced-resolve\lib\Resolver.j
+s:1111:5][0m
+    [2m[at eval (eval at create (D:\C
+ivicAI\frontend\node_modules\tapable\l
+ib\HookCodeFactory.js:31:10), 
+<anonymous>:15:1)][0m
+    [2m[at D:\CivicAI\frontend\node_m
+odules\enhanced-resolve\lib\Resolver.j
+s:1111:5][0m
+    [2m[at eval (eval at create (D:\C
+ivicAI\frontend\node_modules\tapable\l
+ib\HookCodeFactory.js:31:10), 
+<anonymous>:27:1)][0m
+    [2m[at D:\CivicAI\frontend\node_m
+odules\enhanced-resolve\lib\Descriptio
+nFilePlugin.js:94:43][0m
+    [2m[at D:\CivicAI\frontend\node_m
+odules\enhanced-resolve\lib\Resolver.j
+s:1111:5][0m
+    [2m[at eval (eval at create (D:\C
+ivicAI\frontend\node_modules\tapable\l
+ib\HookCodeFactory.js:31:10), 
+<anonymous>:15:1)][0m
+    [2m[at D:\CivicAI\frontend\node_m
+odules\enhanced-resolve\lib\Resolver.j
+s:1111:5][0m {
+  details: "resolve 
+'tailwindcss-animate' in 
+'D:\\CivicAI\\frontend\\src\\app'\n" +
+    '  Parsed request is a module\n' +
+    '  using description file: 
+D:\\CivicAI\\frontend\\package.json 
+(relative path: ./src/app)\n' +
+    '    resolve as module\n' +
+    "      D:\\CivicAI\\frontend\\src\
+\app\\node_modules doesn't exist or 
+is not a directory\n" +
+    "      D:\\CivicAI\\frontend\\src\
+\node_modules doesn't exist or is not 
+a directory\n" +
+    '      looking for modules in D:\\
+CivicAI\\frontend\\node_modules\n' +
+    '        single file module\n' +
+    '          using description 
+file: 
+D:\\CivicAI\\frontend\\package.json 
+(relative path: ./node_modules/tailwin
+dcss-animate)\n' +
+    '            no extension\n' +
+    "              D:\\CivicAI\\fronte
+nd\\node_modules\\tailwindcss-animate 
+doesn't exist\n" +
+    '            .js\n' +
+    "              D:\\CivicAI\\fronte
+nd\\node_modules\\tailwindcss-animate.
+js doesn't exist\n" +
+    '            .json\n' +
+    "              D:\\CivicAI\\fronte
+nd\\node_modules\\tailwindcss-animate.
+json doesn't exist\n" +
+    '            .node\n' +
+    "              D:\\CivicAI\\fronte
+nd\\node_modules\\tailwindcss-animate.
+node doesn't exist\n" +
+    '            .ts\n' +
+    "              D:\\CivicAI\\fronte
+nd\\node_modules\\tailwindcss-animate.
+ts doesn't exist\n" +
+    "        D:\\CivicAI\\frontend\\no
+de_modules\\tailwindcss-animate 
+doesn't exist\n" +
+    "      D:\\CivicAI\\node_modules 
+doesn't exist or is not a 
+directory\n" +
+    "      D:\\node_modules doesn't 
+exist or is not a directory"
+}
+
+> Build error occurred
+Error: Turbopack build failed with 1 
+errors:
+./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: D:\CivicA
+I\frontend\src\app\globals.css:1:1: 
+Can't resolve 'tailwindcss-animate' 
+in 'D:\CivicAI\frontend\src\app'
+    at Input.error (node_modules/postc
+ss/lib/input.js:135:16) [D:\CivicAI\fr
+ontend\.next\build\chunks\node_modules
+_20v-8wl._.js:4689:22]
+    at error (node_modules/postcss/lib
+/node.js:149:32) [D:\CivicAI\frontend\
+.next\build\chunks\node_modules_20v-8w
+l._.js:957:38]
+    [at Object.Once (D:\CivicAI\fronte
+nd\node_modules\@tailwindcss\postcss\d
+ist\index.js:10:6918)]
+    at async LazyResult.runAsync (node
+_modules/postcss/lib/lazy-result.js:29
+3:11) [D:\CivicAI\frontend\.next\build
+\chunks\node_modules_20v-8wl._.js:6272
+:21]
+    at async transform (turbopack:///[
+turbopack-node]/transforms/postcss.ts:
+70:34) [D:\CivicAI\frontend\.next\buil
+d\chunks\[root-of-the-server]__0oj80bi
+._.js:146:36]
+    at async run (turbopack:///[turbop
+ack-node]/child_process/evaluate.ts:89
+:23) [D:\CivicAI\frontend\.next\build\
+chunks\[root-of-the-server]__1f933tp._
+.js:443:31]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client 
+Component Browser]
+    ./src/app/layout.tsx [Server 
+Component]
+
+
+    at async transform (turbopack:///[
+turbopack-node]/transforms/postcss.ts:
+70:34) [D:\CivicAI\frontend\.next\buil
+d\chunks\[root-of-the-server]__0oj80bi
+._.js:146:36])
+    at async run (turbopack:///[turbop
+ack-node]/child_process/evaluate.ts:89
+:23) [D:\CivicAI\frontend\.next\build\
+chunks\[root-of-the-server]__1f933tp._
+.js:443:31])

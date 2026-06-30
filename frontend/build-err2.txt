@@ -1,0 +1,37 @@
+﻿▲ Next.js 16.2.9 (Turbopack)
+- Environments: .env.local
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+Error: "." is not exported under the conditions ["node","require"] from package D:\CivicAI\frontend\node_modules\tw-animate-css (see exports field in D:\CivicAI\frontend\node_modules\tw-animate-css\package.json)
+    [2m[at D:\CivicAI\frontend\node_modules\enhanced-resolve\lib\ExportsFieldPlugin.js:133:7][0m
+    [2m[at Hook.eval [as callAsync] (eval at create (D:\CivicAI\frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:22:1)][0m
+    [2m[at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (D:\CivicAI\frontend\node_modules\tapable\lib\Hook.js:21:14)][0m
+    [2m[at Resolver.doResolve (D:\CivicAI\frontend\node_modules\enhanced-resolve\lib\Resolver.js:1108:16)][0m
+    [2m[at D:\CivicAI\frontend\node_modules\enhanced-resolve\lib\DescriptionFilePlugin.js:85:17][0m
+    [2m[at onLevelDone (D:\CivicAI\frontend\node_modules\enhanced-resolve\lib\DescriptionFileUtils.js:186:22)][0m
+    [2m[at D:\CivicAI\frontend\node_modules\enhanced-resolve\lib\forEachBail.js:39:13][0m
+    [2m[at onJson (D:\CivicAI\frontend\node_modules\enhanced-resolve\lib\DescriptionFileUtils.js:117:4)][0m
+    [2m[at D:\CivicAI\frontend\node_modules\enhanced-resolve\lib\DescriptionFileUtils.js:144:5][0m
+    [2m[at SyncAsyncFileSystemDecorator.readJson (D:\CivicAI\frontend\node_modules\enhanced-resolve\lib\SyncAsyncFileSystemDecorator.js:204:6)][0m
+System.Management.Automation.RemoteException
+> Build error occurred
+Error: Turbopack build failed with 1 errors:
+./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: D:\CivicAI\frontend\src\app\globals.css:1:1: "." is not exported under the conditions ["node","require"] from package D:\CivicAI\frontend\node_modules\tw-animate-css (see exports field in D:\CivicAI\frontend\node_modules\tw-animate-css\package.json)
+    at Input.error (node_modules/postcss/lib/input.js:135:16) [D:\CivicAI\frontend\.next\build\chunks\node_modules_20v-8wl._.js:4689:22]
+    at error (node_modules/postcss/lib/node.js:149:32) [D:\CivicAI\frontend\.next\build\chunks\node_modules_20v-8wl._.js:957:38]
+    [at Object.Once (D:\CivicAI\frontend\node_modules\@tailwindcss\postcss\dist\index.js:10:6918)]
+    at async LazyResult.runAsync (node_modules/postcss/lib/lazy-result.js:293:11) [D:\CivicAI\frontend\.next\build\chunks\node_modules_20v-8wl._.js:6272:21]
+    at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34) [D:\CivicAI\frontend\.next\build\chunks\[root-of-the-server]__0oj80bi._.js:146:36]
+    at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23) [D:\CivicAI\frontend\.next\build\chunks\[root-of-the-server]__1f933tp._.js:443:31]
+System.Management.Automation.RemoteException
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+    at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34) [D:\CivicAI\frontend\.next\build\chunks\[root-of-the-server]__0oj80bi._.js:146:36])
+    at async run (turbopack:///[turbopack-node]/child_process/evaluate.ts:89:23) [D:\CivicAI\frontend\.next\build\chunks\[root-of-the-server]__1f933tp._.js:443:31])
